@@ -7,9 +7,7 @@
 <title>妖怪メダル図鑑</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -47,10 +45,6 @@ main{
   padding:20px;
   margin-bottom:16px;
   box-shadow:0 5px 20px rgba(0,0,0,.07);
-}
-
-h2{
-  margin-top:0;
 }
 
 .camera{
@@ -92,10 +86,6 @@ button{
   color:white;
 }
 
-button:active{
-  transform:scale(.98);
-}
-
 .secondary{
   background:#e8ebf0;
   color:#222;
@@ -113,6 +103,13 @@ button:active{
   line-height:1.5;
 }
 
+#photo{
+  width:100%;
+  border-radius:18px;
+  margin-top:15px;
+  display:none;
+}
+
 .result{
   text-align:center;
 }
@@ -124,38 +121,23 @@ button:active{
 .result-name{
   font-size:28px;
   font-weight:800;
-  margin:8px 0;
 }
 
 .medal{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  padding:14px;
-  border:1px solid #e2e5e9;
+  padding:15px;
+  border:1px solid #ddd;
   border-radius:16px;
   margin-top:10px;
 }
 
-.medal-icon{
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  background:#eee;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:28px;
-}
-
 .medal-name{
-  font-size:18px;
+  font-size:19px;
   font-weight:bold;
 }
 
 .medal-count{
   color:#666;
-  margin-top:4px;
+  margin-top:5px;
 }
 
 .progress{
@@ -170,19 +152,6 @@ button:active{
   height:100%;
   width:0%;
   background:#202124;
-  transition:.3s;
-}
-
-.empty{
-  color:#777;
-  text-align:center;
-  padding:15px;
-}
-
-.note{
-  font-size:13px;
-  color:#777;
-  line-height:1.6;
 }
 </style>
 </head>
@@ -190,435 +159,409 @@ button:active{
 <body>
 
 <header>
-  <h1>👻 妖怪メダル図鑑</h1>
-  <p>メダルを集めて図鑑を完成させよう</p>
+<h1>👻 妖怪メダル図鑑</h1>
+<p>メダルを集めて図鑑を完成させよう</p>
 </header>
 
 <main>
 
-  <!-- カメラ -->
-  <section class="card">
+<section class="card">
 
-    <h2>📷 メダルを発見</h2>
+<h2>📷 メダルを撮影</h2>
 
-    <div id="camera" class="camera">
+<div id="camera" class="camera">
 
-      <video
-        id="video"
-        autoplay
-        playsinline
-        muted>
-      </video>
+<video
+id="video"
+autoplay
+playsinline
+muted>
+</video>
 
-      <div class="guide"></div>
+<div class="guide"></div>
 
-    </div>
+</div>
 
-    <button id="startButton">
-      📷 カメラを起動
-    </button>
+<button id="startButton">
+📷 カメラを起動
+</button>
 
-    <button id="captureButton" class="hidden">
-      🪙 メダルを撮影
-    </button>
+<button id="captureButton" class="hidden">
+🪙 メダルを撮影
+</button>
 
-    <button id="stopButton" class="secondary hidden">
-      カメラを閉じる
-    </button>
+<button id="stopButton" class="secondary hidden">
+カメラを閉じる
+</button>
 
-    <div id="status" class="status">
-      メダルをカメラの中央に入れてください。
-    </div>
+<div id="status" class="status">
+メダルを枠の中に入れてください。
+</div>
 
-  </section>
+<img id="photo">
 
-
-  <!-- 認識結果 -->
-
-  <section id="resultCard" class="card hidden">
-
-    <div class="result">
-
-      <div class="result-icon">
-        👻
-      </div>
-
-      <div id="resultName" class="result-name">
-        妖怪
-      </div>
-
-      <p id="resultMessage">
-        メダルを発見しました！
-      </p>
-
-    </div>
-
-  </section>
+</section>
 
 
-  <!-- 図鑑 -->
+<section id="resultCard" class="card hidden">
 
-  <section class="card">
+<div class="result">
 
-    <h2>📖 妖怪図鑑</h2>
+<div class="result-icon">👻</div>
 
-    <div id="collection"></div>
+<div id="resultName" class="result-name">
+妖怪
+</div>
 
-  </section>
+<p id="resultMessage">
+メダルを発見しました！
+</p>
 
+</div>
 
-  <!-- コレクション -->
-
-  <section class="card">
-
-    <h2>📊 コレクション</h2>
-
-    <div id="progressText">
-      0 / 5 種類発見
-    </div>
-
-    <div class="progress">
-      <div id="progressBar" class="progress-bar"></div>
-    </div>
-
-  </section>
+</section>
 
 
-  <section class="card">
+<section class="card">
 
-    <p class="note">
-      ※現在はカメラ機能を作る第1版です。
-      次の段階でメダルの画像をAIで認識できるようにします。
-    </p>
+<h2>📖 妖怪図鑑</h2>
 
-  </section>
+<div id="collection"></div>
+
+</section>
+
+
+<section class="card">
+
+<h2>📊 コレクション</h2>
+
+<div id="progressText">
+0 / 5 種類発見
+</div>
+
+<div class="progress">
+<div id="progressBar" class="progress-bar"></div>
+</div>
+
+</section>
 
 </main>
 
 
 <script>
 
-let stream = null;
+let stream=null;
 
 
-/*
-  妖怪データ
-  今後ここにどんどん追加する
-*/
+/* 妖怪データ */
 
-const yokai = [
+const yokai=[
 
-  {
-    id:"jibanyan",
-    name:"ジバニャン"
-  },
+{
+id:"jibanyan",
+name:"ジバニャン"
+},
 
-  {
-    id:"komasan",
-    name:"コマさん"
-  },
+{
+id:"komasan",
+name:"コマさん"
+},
 
-  {
-    id:"komajiro",
-    name:"コマじろう"
-  },
+{
+id:"komajiro",
+name:"コマじろう"
+},
 
-  {
-    id:"whisper",
-    name:"ウィスパー"
-  },
+{
+id:"whisper",
+name:"ウィスパー"
+},
 
-  {
-    id:"shogunyan",
-    name:"ブシニャン"
-  }
+{
+id:"shogunyan",
+name:"ブシニャン"
+}
 
 ];
 
 
-/*
-  所持データ
-*/
+/* 所持データ */
 
-let collection =
-  JSON.parse(
-    localStorage.getItem(
-      "youkai_medal_collection"
-    ) || "{}"
-  );
+let collection=
+JSON.parse(
+localStorage.getItem(
+"youkai_collection"
+)||"{}"
+);
 
 
-const video =
-  document.getElementById("video");
+/* HTML */
 
-const camera =
-  document.getElementById("camera");
+const video=
+document.getElementById("video");
 
-const startButton =
-  document.getElementById("startButton");
+const camera=
+document.getElementById("camera");
 
-const captureButton =
-  document.getElementById("captureButton");
+const startButton=
+document.getElementById("startButton");
 
-const stopButton =
-  document.getElementById("stopButton");
+const captureButton=
+document.getElementById("captureButton");
 
-const status =
-  document.getElementById("status");
+const stopButton=
+document.getElementById("stopButton");
 
-const resultCard =
-  document.getElementById("resultCard");
+const status=
+document.getElementById("status");
 
-const resultName =
-  document.getElementById("resultName");
+const photo=
+document.getElementById("photo");
 
-const resultMessage =
-  document.getElementById("resultMessage");
+const resultCard=
+document.getElementById("resultCard");
 
-const collectionElement =
-  document.getElementById("collection");
+const resultName=
+document.getElementById("resultName");
 
-const progressText =
-  document.getElementById("progressText");
+const resultMessage=
+document.getElementById("resultMessage");
 
-const progressBar =
-  document.getElementById("progressBar");
+const collectionElement=
+document.getElementById("collection");
+
+const progressText=
+document.getElementById("progressText");
+
+const progressBar=
+document.getElementById("progressBar");
 
 
-/*
-  カメラを起動
-*/
+/* カメラ */
 
 async function startCamera(){
 
-  try{
+try{
 
-    stream =
-      await navigator.mediaDevices.getUserMedia({
+stream=
+await navigator.mediaDevices.getUserMedia({
 
-        video:{
-          facingMode:{
-            ideal:"environment"
-          }
-        },
+video:{
+facingMode:"environment"
+},
 
-        audio:false
+audio:false
 
-      });
+});
 
-    video.srcObject = stream;
+video.srcObject=stream;
 
-    camera.style.display = "block";
+camera.style.display="block";
 
-    startButton.classList.add("hidden");
+startButton.classList.add("hidden");
 
-    captureButton.classList.remove("hidden");
+captureButton.classList.remove("hidden");
 
-    stopButton.classList.remove("hidden");
+stopButton.classList.remove("hidden");
 
-    status.textContent =
-      "📷 メダルを枠の中に入れてください。";
+status.textContent=
+"📷 メダルを枠の中に入れてください。";
 
-  }
+}catch(error){
 
-  catch(error){
+status.textContent=
+"カメラを起動できませんでした。";
 
-    status.textContent =
-      "カメラを起動できませんでした。カメラの許可を確認してください。";
-
-  }
+}
 
 }
 
 
-/*
-  カメラを停止
-*/
+/* カメラ停止 */
 
 function stopCamera(){
 
-  if(stream){
+if(stream){
 
-    stream
-      .getTracks()
-      .forEach(track => track.stop());
+stream
+.getTracks()
+.forEach(track=>track.stop());
 
-  }
+}
 
-  stream = null;
+stream=null;
 
-  video.srcObject = null;
+video.srcObject=null;
 
-  camera.style.display = "none";
+camera.style.display="none";
 
-  startButton.classList.remove("hidden");
+startButton.classList.remove("hidden");
 
-  captureButton.classList.add("hidden");
+captureButton.classList.add("hidden");
 
-  stopButton.classList.add("hidden");
+stopButton.classList.add("hidden");
 
 }
 
 
-/*
-  撮影
-*/
+/* 写真撮影 */
 
 function captureMedal(){
 
-  status.textContent =
-    "🔍 メダルを解析しています…";
+if(!video.videoWidth){
 
-  captureButton.disabled = true;
+status.textContent=
+"カメラの準備ができていません。";
 
-  /*
-    現段階ではテスト認識。
-    次のアップデートでここを
-    本物の画像認識AIに変更する。
-  */
-
-  setTimeout(function(){
-
-    const result =
-      yokai[
-        Math.floor(
-          Math.random() * yokai.length
-        )
-      ];
-
-    discover(result);
-
-    captureButton.disabled = false;
-
-  },1000);
+return;
 
 }
 
 
+/* Canvasに写真をコピー */
+
+const canvas=
+document.createElement("canvas");
+
+canvas.width=video.videoWidth;
+
+canvas.height=video.videoHeight;
+
+const ctx=
+canvas.getContext("2d");
+
+ctx.drawImage(
+video,
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+
+/* 撮影した画像を表示 */
+
+photo.src=
+canvas.toDataURL("image/jpeg",0.9);
+
+photo.style.display="block";
+
+
+status.textContent=
+"📸 メダルを撮影しました！";
+
+
 /*
-  妖怪を発見
+次の段階で、この画像をAIに渡して
+妖怪を判定する。
 */
+
+
+setTimeout(()=>{
+
+const result=
+yokai[0];
+
+discover(result);
+
+},800);
+
+}
+
+
+/* 発見 */
 
 function discover(medal){
 
-  collection[medal.id] =
-    (collection[medal.id] || 0) + 1;
+collection[medal.id]=
+(collection[medal.id]||0)+1;
 
-  localStorage.setItem(
-    "youkai_medal_collection",
-    JSON.stringify(collection)
-  );
+localStorage.setItem(
+"youkai_collection",
+JSON.stringify(collection)
+);
 
-  resultCard.classList.remove("hidden");
+resultCard.classList.remove("hidden");
 
-  resultName.textContent =
-    medal.name;
+resultName.textContent=
+medal.name;
 
-  resultMessage.textContent =
-    "✨ " +
-    medal.name +
-    "を発見！";
+resultMessage.textContent=
+"✨ "+medal.name+"を発見！";
 
-  status.textContent =
-    "🎉 図鑑に登録しました！";
+status.textContent=
+"🎉 図鑑に登録しました！";
 
-  renderCollection();
+renderCollection();
 
 }
 
 
-/*
-  図鑑を表示
-*/
+/* 図鑑 */
 
 function renderCollection(){
 
-  collectionElement.innerHTML = "";
+collectionElement.innerHTML="";
 
-  let discovered = 0;
+let discovered=0;
 
-  yokai.forEach(function(medal){
+yokai.forEach(medal=>{
 
-    const count =
-      collection[medal.id] || 0;
+const count=
+collection[medal.id]||0;
 
-    if(count > 0){
+if(count>0){
 
-      discovered++;
+discovered++;
 
-      collectionElement.innerHTML += `
+collectionElement.innerHTML+=`
 
-        <div class="medal">
+<div class="medal">
 
-          <div class="medal-icon">
-            👻
-          </div>
+<div class="medal-name">
+👻 ${medal.name}
+</div>
 
-          <div>
+<div class="medal-count">
+所持枚数：${count}枚
+</div>
 
-            <div class="medal-name">
-              ${medal.name}
-            </div>
+</div>
 
-            <div class="medal-count">
-              所持枚数：${count}枚
-            </div>
+`;
 
-          </div>
+}
 
-        </div>
-
-      `;
-
-    }
-
-  });
+});
 
 
-  if(discovered === 0){
+if(discovered===0){
 
-    collectionElement.innerHTML = `
-      <div class="empty">
-        まだ妖怪を発見していません。
-      </div>
-    `;
-
-  }
-
-
-  progressText.textContent =
-    discovered +
-    " / " +
-    yokai.length +
-    " 種類発見";
-
-
-  const percent =
-    (discovered / yokai.length) * 100;
-
-  progressBar.style.width =
-    percent + "%";
+collectionElement.innerHTML=
+"<p>まだ妖怪を発見していません。</p>";
 
 }
 
 
-/*
-  ボタン
-*/
+progressText.textContent=
+discovered+" / "+yokai.length+" 種類発見";
 
-startButton.onclick =
-  startCamera;
+progressBar.style.width=
+(discovered/yokai.length*100)+"%";
 
-stopButton.onclick =
-  stopCamera;
-
-captureButton.onclick =
-  captureMedal;
+}
 
 
-/*
-  最初の表示
-*/
+/* ボタン */
+
+startButton.onclick=startCamera;
+
+captureButton.onclick=captureMedal;
+
+stopButton.onclick=stopCamera;
+
+
+/* 初期化 */
 
 renderCollection();
 
@@ -626,3 +569,4 @@ renderCollection();
 
 </body>
 </html>
+
